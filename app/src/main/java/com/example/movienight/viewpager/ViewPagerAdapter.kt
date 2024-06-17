@@ -1,4 +1,4 @@
-package com.example.movienight.fragments
+package com.example.movienight.viewpager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -12,10 +12,10 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> HomeFragment()
-            1 -> ChatFragment()
-            2 -> CallsFragment()
-            else -> HomeFragment()
+            0 -> Tab1Fragment()
+            1 -> Tab3Fragment()
+            2 -> Tab2Fragment()
+            else -> Tab1Fragment()
         }
     }
 }
