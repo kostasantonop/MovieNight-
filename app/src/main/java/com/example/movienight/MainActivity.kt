@@ -3,29 +3,27 @@ package com.example.movienight
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.example.movienight.databinding.ActivityMainBinding
 import com.example.movienight.viewpager.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var tabLayout: TabLayout
-    private lateinit var viewPager2: ViewPager2
+    private lateinit var binding: ActivityMainBinding
     private lateinit var viewPagerAdapter: ViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        tabLayout = findViewById(R.id.tab_layout)
-        viewPager2 = findViewById(R.id.view_pager)
         viewPagerAdapter = ViewPagerAdapter(this)
+        binding.viewPager.adapter = viewPagerAdapter
 
-        viewPager2.adapter = viewPagerAdapter
-
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 tab?.let {
-                    viewPager2.currentItem = it.position
+                    binding.viewPager.currentItem = it.position
                 }
             }
 
@@ -36,15 +34,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
-
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                super .onPageSelected(position)
-                tabLayout.getTabAt(position)?.select()
+                super.onPageSelected(position)
+                binding.tabLayout.getTabAt(position)?.select()
             }
         })
-
-
     }
-
 }
