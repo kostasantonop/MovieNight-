@@ -1,4 +1,9 @@
 package com.example.movienight.viewpager.tab1recyclerview
 
-class RecyclerViewHolder {
+import androidx.recyclerview.widget.RecyclerView
+import com.example.movienight.databinding.HolderRecyclerViewBinding
+
+class RecyclerViewHolder(val binding: HolderRecyclerViewBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+
 }
