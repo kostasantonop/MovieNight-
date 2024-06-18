@@ -1,14 +1,14 @@
 package com.example.movienight.viewpager
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.movienight.viewpager.tab1recyclerview.Tab1RecyclerViewFragment
 
-class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
-    FragmentStateAdapter(fragmentActivity) {
+class ViewPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
+
     override fun getItemCount(): Int {
-        return 3
+        return 3 // Number of tabs
     }
 
     override fun createFragment(position: Int): Fragment {
