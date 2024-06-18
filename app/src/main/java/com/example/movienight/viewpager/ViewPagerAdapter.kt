@@ -3,6 +3,7 @@ package com.example.movienight.viewpager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.movienight.viewpager.tab1recyclerview.Tab1RecyclerViewFragment
 
 class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
@@ -12,10 +13,10 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> Tab1Fragment()
+            0 -> Tab1RecyclerViewFragment()
             1 -> Tab3Fragment()
             2 -> Tab2Fragment()
-            else -> Tab1Fragment()
+            else -> Tab1RecyclerViewFragment()
         }
     }
 }

@@ -1,13 +1,13 @@
-package com.example.movienight.viewpager
+package com.example.movienight.viewpager.tab1recyclerview
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.movienight.R
 
-class Tab1Fragment : Fragment() {
+class Tab1RecyclerViewFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -15,6 +15,6 @@ class Tab1Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab1, container, false)
+        return inflater.inflate(R.layout.fragment_tab1_recycler_view, container, false)
     }
 }
