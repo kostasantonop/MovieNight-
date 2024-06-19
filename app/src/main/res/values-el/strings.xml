@@ -4,5 +4,6 @@
     <string name="popular">Δημοφιλή</string>
     <string name="search">Αναζήτηση</string>
     <string name="favorites">Αγαπημένα</string>
-    <string name="movie">Ταινία</string>
+    <string name="movie_hint">O Μάγος του Οζ</string>
+    <string name="movie_prefix">Ταινία:</string>
 </resources>

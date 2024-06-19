@@ -3,5 +3,6 @@
     <string name="popular">Popular</string>
     <string name="search">Search</string>
     <string name="favorites">Favorites</string>
-    <string name="movie">Movie</string>
+    <string name="movie_hint">The Wizard of Oz</string>
+    <string name="movie_prefix">Movie:</string>
 </resources>
