@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/byzantium"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".viewpager.tab1recyclerview.Tab1RecyclerViewFragment">
 
@@ -12,9 +13,11 @@
         android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:layout_margin="20dp"
         android:hint="@string/movie"
+        android:gravity="center"
+        android:layout_margin="40dp"
+        android:padding="20dp"
+        android:background="@color/beige"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -23,8 +26,7 @@
         android:id="@+id/tab2_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/byzantium"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@id/search_edit_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
