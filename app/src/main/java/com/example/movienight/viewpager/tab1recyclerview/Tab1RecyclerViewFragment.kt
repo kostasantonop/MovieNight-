@@ -25,5 +25,6 @@ class Tab1RecyclerViewFragment : Fragment() {
         context?.let {
             binding.tab1RecyclerView.adapter = RecyclerViewAdapter(this)
         }
+
     }
 }
