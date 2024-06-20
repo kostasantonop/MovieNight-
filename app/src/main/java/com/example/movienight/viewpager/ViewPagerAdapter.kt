@@ -14,8 +14,8 @@ class ViewPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activ
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> Tab1RecyclerViewFragment()
-            1 -> Tab3Fragment()
-            2 -> Tab2Fragment()
+            1 -> Tab2RecyclerViewFragment()
+            2 -> Tab3Fragment()
             else -> Tab1RecyclerViewFragment()
         }
     }
