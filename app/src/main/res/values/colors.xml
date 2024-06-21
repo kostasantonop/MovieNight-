@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="byzantium">#702963</color>
     <color name="beige">#F5F5DC</color>
+    <color name="green">#5ED314</color>
+    <color name="red">#FD1111</color>
+    <color name="light_blue">#FF00B0FF</color>
 </resources>
