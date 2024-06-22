@@ -7,8 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.movienight.MovieList
 import com.example.movienight.databinding.FragmentTab2RecyclerViewBinding
 import com.example.movienight.viewpager.tab1recyclerview.MovieAdapter
+import com.google.gson.Gson
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.CIO
+import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
+import kotlinx.coroutines.runBlocking
 
 class Tab2RecyclerViewFragment : Fragment() {
 
@@ -25,19 +32,5 @@ class Tab2RecyclerViewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        val empty_movieList_for_Testing = mutableListOf<Movie>()
-        var moviestatswars = Movie("poster", "Starwars", 8.2,"mia tainia me polemo sto galaxia")
-
-        empty_movieList_for_Testing.add(moviestatswars)
-
-        movieSearchResultAdapter = MovieAdapter(requireContext(),empty_movieList_for_Testing)
-
-
-        binding.tab2RecyclerView.adapter = movieSearchResultAdapter
-        binding.tab2RecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
     }
-
 }

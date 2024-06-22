@@ -5,29 +5,24 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movienight.R
-import com.example.movienight.databinding.AlertDialogInfoMovieBinding
 import com.example.movienight.databinding.HolderRecyclerViewBinding
+import com.squareup.picasso.Picasso
 
 
-class MovieAdapter( private val context: Context, private val movies : MutableList<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private val context: Context, private val movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    class MovieViewHolder( private val binding : HolderRecyclerViewBinding ) :RecyclerView.ViewHolder(binding.root){
+    class MovieViewHolder( val binding : HolderRecyclerViewBinding ) :RecyclerView.ViewHolder(binding.root){
         fun bind(movie : Movie){
-
-
-
             binding.apply {
                 //imageView  //TODO πως θα φορτωθει η εικονα
                 titleTextView.text = movie.title
-                ratingTextView.text = movie.rate.toString()
+                ratingTextView.text = movie.vote_average.toString()
                 infoBtn.setOnClickListener {
 
                     if (itemView.context == null){ return@setOnClickListener}
                     val builder = AlertDialog.Builder(itemView.context)
-                    builder.setMessage(movie.info)
+                    builder.setMessage(movie.overview)
                     builder.setTitle(movie.title)
                     builder.setCancelable(false)
 
@@ -51,7 +46,8 @@ class MovieAdapter( private val context: Context, private val movies : MutableLi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(HolderRecyclerViewBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        val binding = HolderRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MovieViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -59,7 +55,8 @@ class MovieAdapter( private val context: Context, private val movies : MutableLi
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val movieItem = movies[position]
-        holder.bind(movieItem)
+        holder.binding.titleTextView.text = movies[position].title
+        holder.binding.ratingTextView.text = String.format("%.1f", movies[position].vote_average)
+        Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(movies[position].poster_path)).into(holder.binding.imageView)
     }
 }
