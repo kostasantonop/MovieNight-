@@ -23,7 +23,7 @@ class Tab1RecyclerViewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         context?.let {
-            binding.tab1RecyclerView.adapter = RecyclerViewAdapter(this)
+            //binding.tab1RecyclerView.adapter = MovieAdapter()
         }
 
     }

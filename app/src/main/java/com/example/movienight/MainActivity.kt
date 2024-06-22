@@ -39,37 +39,25 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            override fun onTabUnselected(tab: TabLayout.Tab?) {  //TODO ?
             }
-            override fun onTabReselected(tab: TabLayout.Tab?) {
+            override fun onTabReselected(tab: TabLayout.Tab?) {  //TODO ?
             }
-        })
+        }
+        )
 
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 binding.tabLayout.getTabAt(position)?.select()
             }
-        })
+        }
+        )
 
         //connectivity manager
         connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         networkCallback = object : ConnectivityManager.NetworkCallback() {
-            //network available case
-            override fun onAvailable(network: Network) {
-                super.onAvailable(network)
-                notifyNetworkChange(true)
-                this.let {
-                    Alerter.create(this@MainActivity)
-                        .setTitle("NetWork available")
-                        .setText("There are available networks to connect.")
-                        .setDuration(10000)
-                        .setBackgroundColorRes(R.color.green)
-                        .show()
-                }
-            }
-
             //network lost case
             override fun onLost(network: Network) {
                 super.onLost(network)
@@ -83,23 +71,6 @@ class MainActivity : AppCompatActivity() {
                         .show()
                 }
             }
-
-            //network change case
-            override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
-                super.onCapabilitiesChanged(network, networkCapabilities)
-
-                val hasInternet = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-                notifyNetworkChange(hasInternet)
-                this.let {
-                    Alerter.create(this@MainActivity)
-                        .setTitle("Network Connected.")
-                        .setText("Please make sure you are on a safe network.")
-                        .setDuration(10000)
-                        .setBackgroundColorRes(R.color.green)
-                        .show()
-
-                }
-            }
         }
 
         val networkRequest = NetworkRequest.Builder()
@@ -107,7 +78,6 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
-
     }
 
     override fun onDestroy() {
@@ -125,9 +95,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     interface NetworkChangeListener { //αυτο θα γινεται implement απο τα fragment ωστε να μπορουν να καλουν την onNetworkChanged
-
         //αυτη θα καλειται απο το καθε fragment ωστε να γινεται ο ελεγχος συνδεσης
         fun onNetworkChanged(isConnected: Boolean)
     }
-
 }
