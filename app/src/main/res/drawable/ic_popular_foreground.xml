@@ -4,7 +4,8 @@
     android:viewportWidth="24"
     android:viewportHeight="24"
     android:tint="#000000">
-  <group android:scaleX="0.87"
+  <group
+      android:scaleX="0.87"
       android:scaleY="0.87"
       android:translateX="1.56"
       android:translateY="1.56">

@@ -41,7 +41,7 @@
                 android:textSize="40sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                app:layout_constraintRight_toRightOf="parent"
+
                 app:layout_constraintTop_toTopOf="@id/image_view"
                 app:layout_constraintLeft_toRightOf="@+id/image_view"
                 />
@@ -49,15 +49,26 @@
             <TextView
                 android:id="@+id/rating_text_view"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:text="Rating"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/title_text_view"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/image_view"
                 android:textSize="10sp"
                 android:paddingTop="5dp"
                 android:layout_marginHorizontal="1dp"
+                />
+
+            <ImageView
+                android:id="@+id/image_view_star"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toRightOf="@id/image_view"
+                app:layout_constraintTop_toBottomOf="@id/rating_text_view"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="@id/rating_text_view"
+                app:layout_constraintDimensionRatio="1:1"
+                android:src="@drawable/ic_rating_star"
                 />
 
             <Button
@@ -72,11 +83,13 @@
                 app:layout_constraintRight_toLeftOf="@id/checkbox_favorite"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginHorizontal="1dp"
+                android:background="@color/light_grey"
                 android:textSize="10sp"
                 />
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/checkbox_favorite"
+                android:background="@color/light_grey"
                 app:layout_constraintLeft_toRightOf="@+id/info_btn"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

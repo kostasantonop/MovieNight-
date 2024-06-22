@@ -1,26 +1,50 @@
 package com.example.movienight.viewpager.tab1recyclerview
 
 import Movie
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
+import com.example.movienight.R
+import com.example.movienight.databinding.AlertDialogInfoMovieBinding
 import com.example.movienight.databinding.HolderRecyclerViewBinding
 
-class MovieAdapter(private val movies : MutableList<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    class MovieViewHolder(private val binding : HolderRecyclerViewBinding ) :RecyclerView.ViewHolder(binding.root){
+class MovieAdapter( private val context: Context, private val movies : MutableList<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+
+    class MovieViewHolder( private val binding : HolderRecyclerViewBinding ) :RecyclerView.ViewHolder(binding.root){
         fun bind(movie : Movie){
+
+
+
             binding.apply {
-                //imageView  //TODO
+                //imageView  //TODO πως θα φορτωθει η εικονα
                 titleTextView.text = movie.title
                 ratingTextView.text = movie.rate.toString()
                 infoBtn.setOnClickListener {
-                    //εδω θα ανοιγει παραθυρο ισως alerter με τα info
+
+                    if (itemView.context == null){ return@setOnClickListener}
+                    val builder = AlertDialog.Builder(itemView.context)
+                    builder.setMessage(movie.info)
+                    builder.setTitle(movie.title)
+                    builder.setCancelable(false)
+
+                    builder.setPositiveButton("Close ") { dialog, which ->
+                        dialog.dismiss()
+                        // Handle positive button click if needed
+                    }
+
+                    val alertDialog = builder.create()
+                    alertDialog.show()
                 }
                 checkboxFavorite.isChecked = movie.favourite
                 checkboxFavorite.setOnClickListener {
                     if (checkboxFavorite.isChecked){
-                    movie.favourite = true}   //το favourite το χουμε αρχικοποιησει false. σε καθε πατημα αν ελεγεχεται αν ειναι τσεκ και αν ειναι θα γινεται true
+                    movie.favourite = true} else{
+                        movie.favourite = false
+                    }
                 }
             }
         }

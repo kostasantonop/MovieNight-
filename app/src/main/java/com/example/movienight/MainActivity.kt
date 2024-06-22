@@ -39,9 +39,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {  //TODO ?
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
             }
-            override fun onTabReselected(tab: TabLayout.Tab?) {  //TODO ?
+            override fun onTabReselected(tab: TabLayout.Tab?) {
             }
         }
         )
@@ -95,7 +95,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     interface NetworkChangeListener { //αυτο θα γινεται implement απο τα fragment ωστε να μπορουν να καλουν την onNetworkChanged
-        //αυτη θα καλειται απο το καθε fragment ωστε να γινεται ο ελεγχος συνδεσης
-        fun onNetworkChanged(isConnected: Boolean)
+        fun onNetworkChanged(isConnected: Boolean) //αυτη θα καλειται απο το καθε fragment ωστε να γινεται ο ελεγχος συνδεσης
     }
 }

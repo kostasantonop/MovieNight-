@@ -13,7 +13,7 @@ import com.example.movienight.viewpager.tab1recyclerview.MovieAdapter
 class Tab2RecyclerViewFragment : Fragment() {
 
     private lateinit var binding: FragmentTab2RecyclerViewBinding
-    private lateinit var movieAdapter : MovieAdapter
+    private lateinit var movieSearchResultAdapter : MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,10 +32,10 @@ class Tab2RecyclerViewFragment : Fragment() {
 
         empty_movieList_for_Testing.add(moviestatswars)
 
-        movieAdapter = MovieAdapter(empty_movieList_for_Testing)
+        movieSearchResultAdapter = MovieAdapter(requireContext(),empty_movieList_for_Testing)
 
 
-        binding.tab2RecyclerView.adapter = movieAdapter
+        binding.tab2RecyclerView.adapter = movieSearchResultAdapter
         binding.tab2RecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
     }
