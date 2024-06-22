@@ -1,4 +1,4 @@
-package com.example.movienight.viewpager
+package com.example.movienight.viewpager.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,12 +1,11 @@
-package com.example.movienight.viewpager.tab1recyclerview
+package com.example.movienight.viewpager.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movienight.databinding.HolderRecyclerViewBinding
 
-class RecyclerViewAdapter(private val fragment: Fragment) : RecyclerView.Adapter<RecyclerViewHolder>() {
+class RecyclerViewAdapter() : RecyclerView.Adapter<RecyclerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val binding = HolderRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)

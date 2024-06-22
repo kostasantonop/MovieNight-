@@ -3,8 +3,9 @@ package com.example.movienight.viewpager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.movienight.viewpager.tab1recyclerview.Tab1RecyclerViewFragment
-import com.example.movienight.viewpager.tab2recyclerview.Tab2RecyclerViewFragment
+import com.example.movienight.viewpager.fragment.Tab1RecyclerViewFragment
+import com.example.movienight.viewpager.fragment.Tab2RecyclerViewFragment
+import com.example.movienight.viewpager.fragment.Tab3Fragment
 
 class ViewPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
 
