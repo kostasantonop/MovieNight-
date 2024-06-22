@@ -1,8 +1,8 @@
 
 data class Movie(
-    var poster : String,
+    var poster_path : String,
     var title : String,
-    var rate : Double,
-    var info : String,
+    var vote_average : Double,
+    var overview : String,
     var favourite : Boolean = false
 )
