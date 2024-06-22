@@ -41,6 +41,14 @@ android {
 }
 
 dependencies {
+    val ktor_version="2.3.12"
+
+    implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation("io.ktor:ktor-client-cio:$ktor_version")
+
+    implementation("com.google.code.gson:gson:2.11.0")
+
+    implementation ("com.squareup.picasso:picasso:2.8")
 
     implementation("androidx.cardview:cardview:1.0.0")
     implementation(libs.androidx.core.ktx)
