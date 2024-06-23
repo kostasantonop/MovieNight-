@@ -3,10 +3,12 @@ package com.example.movienight.viewpager.fragment
 import Movie
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movienight.MovieList
@@ -36,36 +38,34 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val client = HttpClient(CIO)
-        var searchedMovie: String? = null
 
-        binding.textInputLayout.setEndIconOnClickListener(
-            View.OnClickListener {
-                val searchedMovie: String = binding.textInputEditText.text.toString()
-                searchMovies(client, searchedMovie)
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchMovies(client, query.toString().replace(" ", "%20"))
+                //TODO(figure out why keyboard closes upon clicking the searchview)
                 hideKeyboard()
-                binding.textInputEditText.text = null
+                return true
             }
-        )
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
     }
 
     private fun searchMovies(client: HttpClient, searchedMovie: String?) {
         runBlocking {
             val searchList: MutableList<Movie> = mutableListOf()
-            //TODO: Get more than one page
+
+
             val response =
-                client.get("https://api.themoviedb.org/3/movie/popular?api_key=5272d12fcd7c9ef1b93f5ff8af93a411")
+                client.get("https://api.themoviedb.org/3/search/movie?query=$searchedMovie&include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&api_key=5272d12fcd7c9ef1b93f5ff8af93a411")
 
             val jsonResponse = Gson().fromJson(response.bodyAsText(), MovieList::class.java)
 
-            if (searchedMovie.isNullOrEmpty()) {
-                searchList.addAll(jsonResponse.results)
-            } else {
-                for (movie in jsonResponse.results) {
-                    if (movie.title.contains(searchedMovie, ignoreCase = true)) {
-                        searchList.add(movie)
-                    }
-                }
-            }
+            searchList.addAll(jsonResponse.results)
+
+
             movieSearchResultAdapter = MovieAdapter(requireContext(), searchList)
             binding.tab2RecyclerView.adapter = movieSearchResultAdapter
             binding.tab2RecyclerView.layoutManager = LinearLayoutManager(requireContext())

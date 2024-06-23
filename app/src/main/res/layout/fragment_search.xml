@@ -7,37 +7,16 @@
     android:background="@color/grey"
     tools:context=".viewpager.fragment.PopularFragment">
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_input_layout"
-        style="?attr/textInputFilledStyle"
+    <SearchView
+        android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:boxCornerRadiusTopStart="20dp"
-        app:boxCornerRadiusTopEnd="20dp"
-        app:boxCornerRadiusBottomEnd="20dp"
-        app:boxCornerRadiusBottomStart="20dp"
-        android:hint="@string/movie_prefix"
-        app:expandedHintEnabled="false"
-        android:textColorHint="@color/grey"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/ic_search_small_40"
-        app:endIconTint="@color/black"
+        android:layout_margin="10dp"
+        android:inputType="text"
+        android:queryHint="@string/movie_hint"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_input_edit_text"
-            android:gravity="center"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/black"
-            android:hint="@string/movie_hint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintRight_toRightOf="parent"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -51,6 +30,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_input_layout"/>
+        app:layout_constraintTop_toBottomOf="@id/search_view"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
