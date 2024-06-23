@@ -1,4 +1,4 @@
-package com.example.movienight.viewpager.tab1recyclerview
+package com.example.movienight.viewpager.adapter
 
 import Movie
 import android.content.Context
@@ -10,12 +10,14 @@ import com.example.movienight.databinding.HolderRecyclerViewBinding
 import com.squareup.picasso.Picasso
 
 
-class MovieAdapter(private val context: Context, private val movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private val context: Context, private val movies: MutableList<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     class MovieViewHolder( val binding : HolderRecyclerViewBinding ) :RecyclerView.ViewHolder(binding.root){
         fun bind(movie : Movie){
             binding.apply {
-                //imageView  //TODO πως θα φορτωθει η εικονα
+
+                Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(movie.poster_path)).into(imageView)
+
                 titleTextView.text = movie.title
                 ratingTextView.text = movie.vote_average.toString()
                 infoBtn.setOnClickListener {
@@ -55,8 +57,7 @@ class MovieAdapter(private val context: Context, private val movies: List<Movie>
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.binding.titleTextView.text = movies[position].title
-        holder.binding.ratingTextView.text = String.format("%.1f", movies[position].vote_average)
-        Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(movies[position].poster_path)).into(holder.binding.imageView)
+        val movieItem = movies[position]
+        holder.bind(movieItem)
     }
 }

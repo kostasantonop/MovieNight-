@@ -1,4 +1,4 @@
-package com.example.movienight.viewpager
+package com.example.movienight.viewpager.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.movienight.databinding.FragmentTab3Binding
 
-class Tab3Fragment : Fragment() {
+class FavoritesFragment : Fragment() {
 
     private lateinit var binding: FragmentTab3Binding
 
