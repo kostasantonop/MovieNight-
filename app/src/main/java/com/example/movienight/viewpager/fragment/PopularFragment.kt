@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movienight.MovieList
-import com.example.movienight.databinding.FragmentTab1RecyclerViewBinding
+import com.example.movienight.databinding.FragmentPopularBinding
 import com.example.movienight.viewpager.adapter.MovieAdapter
 import com.google.gson.Gson
 import io.ktor.client.HttpClient
@@ -19,14 +19,14 @@ import kotlinx.coroutines.runBlocking
 
 class PopularFragment : Fragment() {
 
-    private lateinit var binding: FragmentTab1RecyclerViewBinding
+    private lateinit var binding: FragmentPopularBinding
     private lateinit var moviePopularAdapter: MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTab1RecyclerViewBinding.inflate(inflater, container, false)
+        binding = FragmentPopularBinding.inflate(inflater, container, false)
         return binding.root
     }
 
