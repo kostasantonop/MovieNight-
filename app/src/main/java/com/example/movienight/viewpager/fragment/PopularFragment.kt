@@ -43,10 +43,10 @@ class PopularFragment : Fragment() {
 
             val jsonResponse = Gson().fromJson(response.bodyAsText(), MovieList::class.java)
 
-            val mutableList: MutableList<Movie> = jsonResponse.results.toMutableList()
+            val popularList: List<Movie> = jsonResponse.results
 
 
-            moviePopularAdapter = MovieAdapter(requireContext(), mutableList)
+            moviePopularAdapter = MovieAdapter(requireContext(), popularList)
             binding.tab1RecyclerView.adapter = moviePopularAdapter
             binding.tab1RecyclerView.layoutManager = LinearLayoutManager(requireContext())
         }

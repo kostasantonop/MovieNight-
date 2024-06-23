@@ -10,7 +10,7 @@ import com.example.movienight.databinding.HolderRecyclerViewBinding
 import com.squareup.picasso.Picasso
 
 
-class MovieAdapter(private val context: Context, private val movies: MutableList<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private val context: Context, private val movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     class MovieViewHolder( val binding : HolderRecyclerViewBinding ) :RecyclerView.ViewHolder(binding.root){
         fun bind(movie : Movie){
