@@ -34,18 +34,18 @@ class PopularFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val popularList: MutableList<Movie> = mutableListOf()
         val client = HttpClient(CIO)
 
         runBlocking {
-            //TODO(Get more than one pages)
-            val response =
-                client.get("https://api.themoviedb.org/3/movie/popular?api_key=5272d12fcd7c9ef1b93f5ff8af93a411")
+            for (page in 1..5){
+                val response =
+                    client.get("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=$page&sort_by=popularity.desc&api_key=5272d12fcd7c9ef1b93f5ff8af93a411")
 
-            val jsonResponse = Gson().fromJson(response.bodyAsText(), MovieList::class.java)
+                val jsonResponse = Gson().fromJson(response.bodyAsText(), MovieList::class.java)
 
-            val popularList: List<Movie> = jsonResponse.results
-
-
+                popularList.addAll(jsonResponse.results)
+            }
             moviePopularAdapter = MovieAdapter(requireContext(), popularList)
             binding.tab1RecyclerView.adapter = moviePopularAdapter
             binding.tab1RecyclerView.layoutManager = LinearLayoutManager(requireContext())
