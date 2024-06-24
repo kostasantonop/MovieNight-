@@ -41,6 +41,7 @@ class SearchFragment : Fragment() {
 
         binding.searchView.setOnClickListener {
             binding.searchView.onActionViewExpanded()
+            binding.searchView.layoutParams.height = binding.searchView.height
         }
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -59,15 +60,17 @@ class SearchFragment : Fragment() {
 
     private fun searchMovies(client: HttpClient, searchedMovie: String?) {
         runBlocking {
+            val apiKey = "5272d12fcd7c9ef1b93f5ff8af93a411"
             val searchList: MutableList<Movie> = mutableListOf()
 
+            for (page in 1..4) {
+                val response =
+                    client.get("https://api.themoviedb.org/3/search/movie?query=$searchedMovie&include_adult=false&language=en-US&page=$page&api_key=$apiKey")
 
-            val response =
-                client.get("https://api.themoviedb.org/3/search/movie?query=$searchedMovie&include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&api_key=5272d12fcd7c9ef1b93f5ff8af93a411")
+                val jsonResponse = Gson().fromJson(response.bodyAsText(), MovieList::class.java)
 
-            val jsonResponse = Gson().fromJson(response.bodyAsText(), MovieList::class.java)
-
-            searchList.addAll(jsonResponse.results)
+                searchList.addAll(jsonResponse.results)
+            }
 
 
             movieSearchResultAdapter = MovieAdapter(requireContext(), searchList)

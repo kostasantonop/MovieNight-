@@ -3,6 +3,7 @@ package com.example.movienight.viewpager.adapter
 import Movie
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
@@ -16,10 +17,19 @@ class MovieAdapter(private val context: Context, private val movies: List<Movie>
         fun bind(movie : Movie){
             binding.apply {
 
-                Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(movie.poster_path)).into(imageView)
-
+                if (movie.poster_path != null) {
+                    Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(movie.poster_path))
+                        .into(imageView)
+                }
                 titleTextView.text = movie.title
-                ratingTextView.text = String.format("%.1f", movie.vote_average)
+                if(movie.vote_average == 0.0){
+                    ratingTextView.text = "Too few votes!"
+                    imageViewStar.visibility = View.GONE
+                }else {
+                    ratingTextView.text = String.format("%.1f", movie.vote_average)
+                    imageViewStar.visibility = View.VISIBLE
+                }
+
                 infoBtn.setOnClickListener {
 
                     if (itemView.context == null){ return@setOnClickListener}

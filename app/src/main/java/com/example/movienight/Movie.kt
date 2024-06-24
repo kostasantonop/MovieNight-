@@ -1,8 +1,8 @@
 
 data class Movie(
-    var poster_path : String,
-    var title : String,
-    var vote_average : Double,
-    var overview : String,
+    val poster_path : String,
+    val title : String,
+    val vote_average : Double,
+    val overview : String,
     var favourite : Boolean = false
 )

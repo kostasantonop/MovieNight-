@@ -36,11 +36,12 @@ class PopularFragment : Fragment() {
 
         val popularList: MutableList<Movie> = mutableListOf()
         val client = HttpClient(CIO)
+        val apiKey = "5272d12fcd7c9ef1b93f5ff8af93a411"
 
         runBlocking {
             for (page in 1..2){
                 val response =
-                    client.get("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=$page&sort_by=popularity.desc&api_key=5272d12fcd7c9ef1b93f5ff8af93a411")
+                    client.get("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=$page&sort_by=popularity.desc&api_key=$apiKey")
 
                 val jsonResponse = Gson().fromJson(response.bodyAsText(), MovieList::class.java)
 
