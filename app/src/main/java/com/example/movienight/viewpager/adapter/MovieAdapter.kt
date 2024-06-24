@@ -18,7 +18,7 @@ class MovieAdapter(private val context: Context, private val movies: List<Movie>
             binding.apply {
 
                 if (movie.poster_path != null) {
-                    Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(movie.poster_path))
+                    Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(movie.poster_path)).resize(0,620)
                         .into(imageView)
                 }
                 titleTextView.text = movie.title
