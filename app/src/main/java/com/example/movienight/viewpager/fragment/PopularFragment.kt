@@ -38,7 +38,7 @@ class PopularFragment : Fragment() {
         val client = HttpClient(CIO)
 
         runBlocking {
-            for (page in 1..5){
+            for (page in 1..2){
                 val response =
                     client.get("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=$page&sort_by=popularity.desc&api_key=5272d12fcd7c9ef1b93f5ff8af93a411")
 

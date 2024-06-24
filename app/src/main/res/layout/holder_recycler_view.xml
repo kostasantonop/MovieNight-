@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    android:background="@color/dark_grey">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="10dp"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="15dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -32,15 +32,16 @@
 
             <TextView
                 android:id="@+id/title_text_view"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:text="Title"
-                android:textSize="40sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:gravity="center"
-                app:layout_constraintTop_toTopOf="@id/image_view"
-                app:layout_constraintLeft_toRightOf="@+id/image_view"/>
+                android:gravity="top|center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/image_view"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/rating_text_view"/>
 
             <TextView
                 android:id="@+id/rating_text_view"
@@ -48,50 +49,44 @@
                 android:layout_height="wrap_content"
                 android:text="Rating"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/title_text_view"
-                app:layout_constraintLeft_toRightOf="@id/image_view"
                 android:textSize="10sp"
-                android:paddingTop="5dp"
-                android:layout_marginHorizontal="1dp"/>
+                app:layout_constraintLeft_toRightOf="@id/image_view"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_text_view"
+                app:layout_constraintBottom_toTopOf="@id/info_btn"/>
 
             <ImageView
                 android:id="@+id/image_view_star"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintLeft_toRightOf="@id/image_view"
-                app:layout_constraintTop_toBottomOf="@id/rating_text_view"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="@id/rating_text_view"
                 app:layout_constraintDimensionRatio="1:1"
-                android:src="@drawable/ic_rating_star"/>
+                android:src="@drawable/ic_rating_star"
+                app:layout_constraintTop_toTopOf="@id/rating_text_view"
+                app:layout_constraintLeft_toRightOf="@id/rating_text_view"
+                app:layout_constraintBottom_toBottomOf="@id/rating_text_view"/>
 
             <Button
                 android:id="@+id/info_btn"
-                style="@style/Widget.Material3.Button.ElevatedButton"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/ic_info_foreground"
                 android:text="Info"
-                app:layout_constraintLeft_toRightOf="@id/rating_text_view"
-                app:layout_constraintTop_toBottomOf="@id/title_text_view"
-                app:layout_constraintRight_toLeftOf="@id/checkbox_favorite"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginHorizontal="1dp"
-                android:background="@color/light_grey"
-                android:textSize="10sp"/>
+                android:backgroundTint="@color/dark_grey"
+                app:layout_constraintTop_toBottomOf="@id/rating_text_view"
+                app:layout_constraintLeft_toRightOf="@id/image_view"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/checkbox_favorite"/>
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/checkbox_favorite"
-                android:background="@color/light_grey"
-                app:layout_constraintLeft_toRightOf="@+id/info_btn"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_text_view"
-                android:text="Add to Favorites"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Add to Favorites"
                 android:button="@drawable/heart_switcher"
-                />
+                app:layout_constraintLeft_toRightOf="@id/image_view"
+                app:layout_constraintTop_toBottomOf="@id/info_btn"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

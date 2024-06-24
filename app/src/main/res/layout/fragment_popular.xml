@@ -10,7 +10,6 @@
         android:id="@+id/tab1_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/holder_recycler_view"
         app:layout_constraintTop_toTopOf="parent"

@@ -39,6 +39,10 @@ class SearchFragment : Fragment() {
 
         val client = HttpClient(CIO)
 
+        binding.searchView.setOnClickListener {
+            binding.searchView.onActionViewExpanded()
+        }
+
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchMovies(client, query.toString().replace(" ", "%20"))

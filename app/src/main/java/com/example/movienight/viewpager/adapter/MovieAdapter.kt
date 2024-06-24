@@ -19,7 +19,7 @@ class MovieAdapter(private val context: Context, private val movies: List<Movie>
                 Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(movie.poster_path)).into(imageView)
 
                 titleTextView.text = movie.title
-                ratingTextView.text = movie.vote_average.toString()
+                ratingTextView.text = String.format("%.1f", movie.vote_average)
                 infoBtn.setOnClickListener {
 
                     if (itemView.context == null){ return@setOnClickListener}

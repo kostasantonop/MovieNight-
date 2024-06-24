@@ -3,21 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tab1_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/byzantium"
+        android:background="@color/dark_grey"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/holder_recycler_view" />
+        tools:listitem="@layout/holder_recycler_view"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
