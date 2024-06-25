@@ -70,7 +70,7 @@ class SearchFragment : Fragment() {
                 val jsonResponse = Gson().fromJson(response.bodyAsText(), MovieList::class.java)
                 Log.d("TAGD", jsonResponse.results.toString())
 
-                searchList.addAll(jsonResponse.results.mapNotNull{ Movie(it.poster_path, it.title, it.vote_average, it.overview) })
+                searchList.addAll(jsonResponse.results.mapNotNull{ Movie(it.poster_path, it.title, it.vote_average, it.overview, it.release_date) })
             }
 
 

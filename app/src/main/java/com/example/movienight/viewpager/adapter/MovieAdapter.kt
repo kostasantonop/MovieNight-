@@ -17,19 +17,6 @@ class MovieAdapter(private val context: Context, private val movies: List<Movie>
         fun bind(movie : Movie){
             binding.apply {
 
-                if (movie.poster_path != null) {
-                    Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(movie.poster_path)).resize(0,620)
-                        .into(imageView)
-                }
-                titleTextView.text = movie.title
-                if(movie.vote_average == 0.0){
-                    ratingTextView.text = "Too few votes!"
-                    imageViewStar.visibility = View.GONE
-                }else {
-                    ratingTextView.text = String.format("%.1f", movie.vote_average)
-                    imageViewStar.visibility = View.VISIBLE
-                }
-
                 infoBtn.setOnClickListener {
 
                     if (itemView.context == null){ return@setOnClickListener}
@@ -67,7 +54,19 @@ class MovieAdapter(private val context: Context, private val movies: List<Movie>
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val movieItem = movies[position]
-        holder.bind(movieItem)
+        if (movies[position].poster_path != null) {
+            Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(movies[position].poster_path)).resize(0,620)
+                .into(holder.binding.imageView)
+        }
+        holder.binding.titleTextView.text = movies[position].title
+        holder.binding.dateTextView.text = movies[position].release_date?.substring(0, 4)
+        if(movies[position].vote_average == 0.0){
+            holder.binding.ratingTextView.text = "Too few votes!"
+            holder.binding.imageViewStar.visibility = View.GONE
+        }else {
+            holder.binding.ratingTextView.text = String.format("%.1f", movies[position].vote_average)
+            holder.binding.imageViewStar.visibility = View.VISIBLE
+        }
+        holder.bind(movies[position])
     }
 }
