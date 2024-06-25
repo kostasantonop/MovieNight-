@@ -59,7 +59,7 @@ class MovieAdapter(private val context: Context, private val movies: List<Movie>
                 .into(holder.binding.imageView)
         }
         holder.binding.titleTextView.text = movies[position].title
-        holder.binding.dateTextView.text = movies[position].release_date?.substring(0, 4)
+        holder.binding.dateTextView.text = movies[position].release_date?.take(4)
         if(movies[position].vote_average == 0.0){
             holder.binding.ratingTextView.text = "Too few votes!"
             holder.binding.imageViewStar.visibility = View.GONE

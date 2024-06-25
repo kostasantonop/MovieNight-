@@ -63,7 +63,7 @@ class SearchFragment : Fragment() {
             val apiKey = "5272d12fcd7c9ef1b93f5ff8af93a411"
             val searchList: MutableList<Movie> = mutableListOf()
 
-            for (page in 1..4) {
+            for (page in 1..3) {
                 val response =
                     client.get("https://api.themoviedb.org/3/search/movie?query=$searchedMovie&include_adult=false&language=en-US&page=$page&api_key=$apiKey")
 
