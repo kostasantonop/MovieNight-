@@ -25,6 +25,7 @@ class MovieViewHolder( val binding : HolderRecyclerViewBinding) : RecyclerView.V
 
             infoBtn.setOnClickListener {
 
+
             }
 
 
