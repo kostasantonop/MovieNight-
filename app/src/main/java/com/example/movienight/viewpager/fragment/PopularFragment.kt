@@ -45,7 +45,7 @@ class PopularFragment : Fragment() {
 
                 val jsonResponse = Gson().fromJson(response.bodyAsText(), MovieList::class.java)
 
-                popularList.addAll(jsonResponse.results)
+                popularList.addAll(jsonResponse.results.mapNotNull { Movie(it.poster_path, it.title, it.vote_average, it.overview) })
             }
             moviePopularAdapter = MovieAdapter(requireContext(), popularList)
             binding.tab1RecyclerView.adapter = moviePopularAdapter

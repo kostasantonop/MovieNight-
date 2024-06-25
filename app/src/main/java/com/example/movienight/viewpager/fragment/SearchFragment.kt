@@ -68,8 +68,9 @@ class SearchFragment : Fragment() {
                     client.get("https://api.themoviedb.org/3/search/movie?query=$searchedMovie&include_adult=false&language=en-US&page=$page&api_key=$apiKey")
 
                 val jsonResponse = Gson().fromJson(response.bodyAsText(), MovieList::class.java)
+                Log.d("TAGD", jsonResponse.results.toString())
 
-                searchList.addAll(jsonResponse.results)
+                searchList.addAll(jsonResponse.results.mapNotNull{ Movie(it.poster_path, it.title, it.vote_average, it.overview) })
             }
 
 
