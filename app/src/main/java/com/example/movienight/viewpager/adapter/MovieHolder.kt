@@ -2,7 +2,6 @@ package com.example.movienight.viewpager.adapter
 
 import Movie
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movienight.databinding.HolderRecyclerViewBinding
 import com.squareup.picasso.Picasso
@@ -26,20 +25,9 @@ class MovieViewHolder( val binding : HolderRecyclerViewBinding) : RecyclerView.V
 
             infoBtn.setOnClickListener {
 
-                if (itemView.context == null){ return@setOnClickListener}
-                val builder = AlertDialog.Builder(itemView.context)
-                builder.setMessage(movie.overview)
-                builder.setTitle(movie.title)
-                builder.setCancelable(false)
-
-                builder.setPositiveButton("Close ") { dialog, which ->
-                    dialog.dismiss()
-                    // Handle positive button click if needed
-                }
-
-                val alertDialog = builder.create()
-                alertDialog.show()
             }
+
+
             checkboxFavorite.isChecked = movie.favourite
             checkboxFavorite.setOnClickListener {
                 if (checkboxFavorite.isChecked){
