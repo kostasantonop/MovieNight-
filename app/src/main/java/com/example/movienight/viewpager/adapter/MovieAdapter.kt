@@ -3,46 +3,12 @@ package com.example.movienight.viewpager.adapter
 import Movie
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movienight.databinding.HolderRecyclerViewBinding
-import com.squareup.picasso.Picasso
 
 
-class MovieAdapter(private val context: Context, private val movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
-
-    class MovieViewHolder( val binding : HolderRecyclerViewBinding ) :RecyclerView.ViewHolder(binding.root){
-        fun bind(movie : Movie){
-            binding.apply {
-
-                infoBtn.setOnClickListener {
-
-                    if (itemView.context == null){ return@setOnClickListener}
-                    val builder = AlertDialog.Builder(itemView.context)
-                    builder.setMessage(movie.overview)
-                    builder.setTitle(movie.title)
-                    builder.setCancelable(false)
-
-                    builder.setPositiveButton("Close ") { dialog, which ->
-                        dialog.dismiss()
-                        // Handle positive button click if needed
-                    }
-
-                    val alertDialog = builder.create()
-                    alertDialog.show()
-                }
-                checkboxFavorite.isChecked = movie.favourite
-                checkboxFavorite.setOnClickListener {
-                    if (checkboxFavorite.isChecked){
-                    movie.favourite = true} else{
-                        movie.favourite = false
-                    }
-                }
-            }
-        }
-    }
+class MovieAdapter(private val context: Context, private val movies: List<Movie>) : RecyclerView.Adapter<MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding = HolderRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -54,19 +20,7 @@ class MovieAdapter(private val context: Context, private val movies: List<Movie>
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        if (movies[position].poster_path != null) {
-            Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(movies[position].poster_path)).resize(0,620)
-                .into(holder.binding.imageView)
-        }
-        holder.binding.titleTextView.text = movies[position].title
-        holder.binding.dateTextView.text = movies[position].release_date?.take(4)
-        if(movies[position].vote_average == 0.0){
-            holder.binding.ratingTextView.text = "Too few votes!"
-            holder.binding.imageViewStar.visibility = View.GONE
-        }else {
-            holder.binding.ratingTextView.text = String.format("%.1f", movies[position].vote_average)
-            holder.binding.imageViewStar.visibility = View.VISIBLE
-        }
-        holder.bind(movies[position])
+        val movieItem = movies[position]
+        holder.bind(movieItem)
     }
 }
