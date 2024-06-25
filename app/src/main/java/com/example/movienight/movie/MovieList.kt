@@ -1,6 +1,4 @@
-package com.example.movienight
-
-import Movie
+package com.example.movienight.movie
 
 data class MovieList(
     val results: List<Movie>

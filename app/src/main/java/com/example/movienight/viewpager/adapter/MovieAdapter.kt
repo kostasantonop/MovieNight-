@@ -1,6 +1,6 @@
 package com.example.movienight.viewpager.adapter
 
-import Movie
+import com.example.movienight.movie.Movie
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup

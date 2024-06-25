@@ -1,6 +1,6 @@
 package com.example.movienight.viewpager.fragment
 
-import Movie
+import com.example.movienight.movie.Movie
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.movienight.MovieList
+import com.example.movienight.movie.MovieList
 import com.example.movienight.databinding.FragmentSearchBinding
 import com.example.movienight.viewpager.adapter.MovieAdapter
 import com.google.gson.Gson

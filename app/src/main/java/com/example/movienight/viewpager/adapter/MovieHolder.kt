@@ -1,6 +1,6 @@
 package com.example.movienight.viewpager.adapter
 
-import Movie
+import com.example.movienight.movie.Movie
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movienight.databinding.HolderRecyclerViewBinding
