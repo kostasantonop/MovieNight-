@@ -8,17 +8,15 @@ import android.net.NetworkRequest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.movienight.databinding.ActivityMainBinding
-import com.example.movienight.viewpager.ViewPagerAdapter
 import com.example.movienight.viewpager.ViewPagerFragment
 import com.tapadoo.alerter.Alerter
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewPagerAdapter: ViewPagerAdapter
-
 
     private lateinit var connectivityManager: ConnectivityManager
+
     private lateinit var networkCallback: ConnectivityManager.NetworkCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
