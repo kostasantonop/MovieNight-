@@ -1,14 +1,13 @@
 package com.example.movienight.viewpager.recycler
 
-import com.example.movienight.movie.Movie
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movienight.databinding.HolderRecyclerViewBinding
+import com.example.movienight.movie.Movie
 
 
-class MovieAdapter(private val context: Context, private val movies: List<Movie>) : RecyclerView.Adapter<MovieViewHolder>() {
+class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding = HolderRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)

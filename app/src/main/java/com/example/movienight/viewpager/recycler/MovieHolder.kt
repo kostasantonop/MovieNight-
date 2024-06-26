@@ -1,9 +1,9 @@
 package com.example.movienight.viewpager.recycler
 
-import com.example.movienight.movie.Movie
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movienight.databinding.HolderRecyclerViewBinding
+import com.example.movienight.movie.Movie
 import com.squareup.picasso.Picasso
 
 class MovieViewHolder( val binding : HolderRecyclerViewBinding) : RecyclerView.ViewHolder(binding.root){
@@ -23,12 +23,9 @@ class MovieViewHolder( val binding : HolderRecyclerViewBinding) : RecyclerView.V
                 binding.imageViewStar.visibility = View.VISIBLE
             }
 
-            infoBtn.setOnClickListener {
-
+            binding.infoBtn.setOnClickListener {
 
             }
-
-
             checkboxFavorite.isChecked = movie.favourite
             checkboxFavorite.setOnClickListener {
                 if (checkboxFavorite.isChecked){

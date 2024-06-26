@@ -47,7 +47,7 @@ class PopularFragment : Fragment() {
 
                 popularList.addAll(jsonResponse.results.mapNotNull { Movie(it.id, it.poster_path, it.title, it.vote_average, it.release_date) })
             }
-            moviePopularAdapter = MovieAdapter(requireContext(), popularList)
+            moviePopularAdapter = MovieAdapter(popularList)
             binding.tab1RecyclerView.adapter = moviePopularAdapter
             binding.tab1RecyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
