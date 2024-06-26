@@ -5,22 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.example.movienight.MovieViewModel
 import com.example.movienight.databinding.FragmentPopularBinding
-import com.example.movienight.movie.Movie
-import com.example.movienight.movie.MovieList
 import com.example.movienight.viewpager.recycler.MovieAdapter
-import com.google.gson.Gson
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
-import io.ktor.client.request.get
-import io.ktor.client.statement.bodyAsText
-import kotlinx.coroutines.runBlocking
 
 class PopularFragment : Fragment() {
 
     private lateinit var binding: FragmentPopularBinding
-    private lateinit var moviePopularAdapter: MovieAdapter
+    private lateinit var movieViewModel: MovieViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val act = activity
+        movieViewModel = if (act != null) {
+            ViewModelProvider(act).get(MovieViewModel::class.java)
+        } else {
+            ViewModelProvider(this).get(MovieViewModel::class.java)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,26 +34,15 @@ class PopularFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val popularList: MutableList<Movie> = mutableListOf()
-        val client = HttpClient(CIO)
-        val apiKey = "5272d12fcd7c9ef1b93f5ff8af93a411"
+        movieViewModel.popularMovies()
 
-        runBlocking {
-            for (page in 1..2){
-                val response =
-                    client.get("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=$page&sort_by=popularity.desc&api_key=$apiKey")
+        movieViewModel.movies1.observe(viewLifecycleOwner, Observer { dataList ->
+            binding.tab1RecyclerView.adapter =
+                MovieAdapter(movies = dataList)
+        })
 
-                val jsonResponse = Gson().fromJson(response.bodyAsText(), MovieList::class.java)
-
-                popularList.addAll(jsonResponse.results.mapNotNull { Movie(it.id, it.poster_path, it.title, it.vote_average, it.release_date) })
-            }
-            moviePopularAdapter = MovieAdapter(popularList)
-            binding.tab1RecyclerView.adapter = moviePopularAdapter
-            binding.tab1RecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        }
     }
 }

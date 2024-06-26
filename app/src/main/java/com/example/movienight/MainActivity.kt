@@ -58,18 +58,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showAlerter(title: String, text: String, colorRes: Int) {
-        runOnUiThread {
-            Alerter.hide()
-            Alerter.create(this@MainActivity)
-                .setTitle(title)
-                .setText(text)
-                .setBackgroundColorRes(colorRes)
-                .enableInfiniteDuration(true)
-                .setOnClickListener {
-                    startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
-                }
-                .show()
-        }
+        Alerter.hide()
+        Alerter.create(this@MainActivity)
+            .setTitle(title)
+            .setText(text)
+            .setBackgroundColorRes(colorRes)
+            .enableInfiniteDuration(true)
+            .setOnClickListener {
+                startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
+            }.show()
     }
 }
 
