@@ -1,9 +1,8 @@
 package com.example.movienight
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -34,19 +33,12 @@ class MainActivity : AppCompatActivity() {
         observeNetworkStatus()
     }
 
-    private fun checkNetworkStatus(): Boolean {
-        val connectivityManager =
-            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val network = connectivityManager.activeNetwork
-        val capabilities = connectivityManager.getNetworkCapabilities(network)
-        return capabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
-    }
-
     private fun observeNetworkStatus() {
         lifecycleScope.launch {
             connectivityObserver.observe().collect { status ->
                 when (status) {
                     ConnectivityObserver.Status.Available -> {
+                        Alerter.hide()
                         loadFragment(ViewPagerFragment())
                     }
                     ConnectivityObserver.Status.Lost -> {
@@ -72,6 +64,10 @@ class MainActivity : AppCompatActivity() {
                 .setTitle(title)
                 .setText(text)
                 .setBackgroundColorRes(colorRes)
+                .enableInfiniteDuration(true)
+                .setOnClickListener {
+                    startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
+                }
                 .show()
         }
     }

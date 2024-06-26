@@ -2,6 +2,7 @@ package com.example.movienight.viewpager.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +47,7 @@ class SearchFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchMovies(client, query.toString().replace(" ", "%20"))
-                //TODO(figure out why keyboard closes upon clicking the searchview)
+                Log.d("Tag", query.toString())
                 hideKeyboard()
                 return true
             }
