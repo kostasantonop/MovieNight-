@@ -2,73 +2,80 @@ package com.example.movienight
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.Network
 import android.net.NetworkCapabilities
-import android.net.NetworkRequest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.movienight.databinding.ActivityMainBinding
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.example.movienight.viewpager.ConnectivityObserver
+import com.example.movienight.viewpager.NetworkConnectivityObserver
 import com.example.movienight.viewpager.ViewPagerFragment
+import com.example.movienight.viewpager.fragment.NoInternetFragment
 import com.tapadoo.alerter.Alerter
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
-    private lateinit var connectivityManager: ConnectivityManager
-
-    private lateinit var networkCallback: ConnectivityManager.NetworkCallback
+    private lateinit var connectivityObserver: NetworkConnectivityObserver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction()
-            .replace(binding.fragmentContainer.id, ViewPagerFragment())
-            .commit()
+        connectivityObserver = NetworkConnectivityObserver(applicationContext)
 
-        //connectivity manager
-        connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val initialStatus = connectivityObserver.checkInitialNetworkStatus()
+        if (initialStatus == ConnectivityObserver.Status.Available) {
+            loadFragment(ViewPagerFragment())
+        } else {
+            loadFragment(NoInternetFragment())
+            showAlerter("Network Status", "No network connection.", R.color.dark_grey)
+        }
+        observeNetworkStatus()
+    }
 
-        networkCallback = object : ConnectivityManager.NetworkCallback() {
-            //network lost case
-            override fun onLost(network: Network) {
-                super.onLost(network)
-                notifyNetworkChange(false)
-                this.let {
-                    Alerter.create(this@MainActivity)
-                        .setTitle("NetWork lost...")
-                        .setText("It seems your connection is lost. Please check your connection or connect to another network.")
-                        .setDuration(10000)
-                        .setBackgroundColorRes(R.color.red)
-                        .show()
+    private fun checkNetworkStatus(): Boolean {
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork
+        val capabilities = connectivityManager.getNetworkCapabilities(network)
+        return capabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
+    }
+
+    private fun observeNetworkStatus() {
+        lifecycleScope.launch {
+            connectivityObserver.observe().collect { status ->
+                when (status) {
+                    ConnectivityObserver.Status.Available -> {
+                        loadFragment(ViewPagerFragment())
+                    }
+                    ConnectivityObserver.Status.Lost -> {
+                        showAlerter("Network Status", "No network connection.", R.color.dark_grey)
+                        loadFragment(NoInternetFragment())
+                    }
+                    else -> Unit
                 }
             }
         }
-
-        val networkRequest = NetworkRequest.Builder()
-            .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-            .build()
-
-        connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        connectivityManager.unregisterNetworkCallback(networkCallback)
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
     }
 
-    private fun notifyNetworkChange(isConnected: Boolean) {
-        // Notify all fragments or any component interested in network changes
-        supportFragmentManager.fragments.forEach { fragment ->
-            if (fragment is NetworkChangeListener) {
-                fragment.onNetworkChanged(isConnected)
-            }
+    private fun showAlerter(title: String, text: String, colorRes: Int) {
+        runOnUiThread {
+            Alerter.hide()
+            Alerter.create(this@MainActivity)
+                .setTitle(title)
+                .setText(text)
+                .setBackgroundColorRes(colorRes)
+                .show()
         }
     }
-
-    interface NetworkChangeListener { //αυτο θα γινεται implement απο τα fragment ωστε να μπορουν να καλουν την onNetworkChanged
-        fun onNetworkChanged(isConnected: Boolean) //αυτη θα καλειται απο το καθε fragment ωστε να γινεται ο ελεγχος συνδεσης
-    }
 }
+
+
+
