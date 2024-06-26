@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movienight.movie.MovieList
 import com.example.movienight.databinding.FragmentSearchBinding
-import com.example.movienight.viewpager.adapter.MovieAdapter
+import com.example.movienight.viewpager.recycler.MovieAdapter
 import com.google.gson.Gson
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO

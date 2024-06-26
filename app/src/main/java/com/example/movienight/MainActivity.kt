@@ -7,10 +7,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.movienight.viewpager.ConnectivityObserver
-import com.example.movienight.viewpager.NetworkConnectivityObserver
 import com.example.movienight.viewpager.ViewPagerFragment
 import com.example.movienight.viewpager.fragment.NoInternetFragment
+import com.example.movienight.viewpager.network.ConnectivityObserver
+import com.example.movienight.viewpager.network.NetworkConnectivityObserver
 import com.tapadoo.alerter.Alerter
 import kotlinx.coroutines.launch
 

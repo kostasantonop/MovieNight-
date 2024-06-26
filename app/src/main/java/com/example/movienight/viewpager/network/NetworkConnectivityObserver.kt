@@ -1,4 +1,4 @@
-package com.example.movienight.viewpager
+package com.example.movienight.viewpager.network
 
 import android.content.Context
 import android.net.ConnectivityManager

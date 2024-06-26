@@ -1,4 +1,4 @@
-package com.example.movienight.viewpager.adapter
+package com.example.movienight.viewpager.recycler
 
 import com.example.movienight.movie.Movie
 import android.content.Context
