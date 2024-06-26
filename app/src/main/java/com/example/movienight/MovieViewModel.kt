@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.movienight.movie.InfoMovie
 import com.example.movienight.movie.Movie
 import com.example.movienight.movie.MovieList
 import com.google.gson.Gson
@@ -22,7 +23,6 @@ class MovieViewModel: ViewModel() {
     val movies2: LiveData<List<Movie>> get() = _movies2
 
     val apiKey = "5272d12fcd7c9ef1b93f5ff8af93a411"
-
     private val client = HttpClient(CIO)
 
 
@@ -63,6 +63,13 @@ class MovieViewModel: ViewModel() {
                 })
             }
             _movies2.postValue(searchList)
+        }
+    }
+
+    fun infoMovies(movieId : String){
+        viewModelScope.launch {
+            val response = client.get("https://api.themoviedb.org/3/movie/$movieId?api_key=$apiKey")
+            val jsonResponse = Gson().fromJson(response.bodyAsText(), InfoMovie::class.java)
         }
     }
 }
