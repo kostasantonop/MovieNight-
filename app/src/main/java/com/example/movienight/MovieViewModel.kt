@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.movienight.movie.InfoMovie
 import com.example.movienight.movie.Movie
 import com.example.movienight.movie.MovieList
-import com.example.movienight.viewpager.ViewPagerFragment
 import com.example.movienight.viewpager.fragment.InfoFragment
 import com.google.gson.Gson
 import io.ktor.client.HttpClient
@@ -33,10 +32,6 @@ class MovieViewModel: ViewModel() {
 
     fun itemSelected(data: String) {
         _streamFragments.postValue(InfoFragment.newInstance(data))
-    }
-
-    fun mainScreen() {
-        _streamFragments.postValue(ViewPagerFragment.newInstance())
     }
 
     val apiKey = "5272d12fcd7c9ef1b93f5ff8af93a411"

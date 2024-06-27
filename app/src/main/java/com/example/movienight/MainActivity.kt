@@ -60,9 +60,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
+        var transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        if (fragment !is ViewPagerFragment){
+            transaction.addToBackStack(null)
+        }
+        transaction.commit()
     }
 
     private fun showAlerter(title: String, text: String, colorRes: Int) {

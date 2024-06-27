@@ -56,7 +56,7 @@ class InfoFragment : Fragment() {
         })
 
         binding.backBtn.setOnClickListener {
-            movieViewModel.mainScreen()
+            activity?.onBackPressed()
         }
 
     }
