@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.movienight.viewpager.ViewPagerFragment
 import com.example.movienight.viewpager.fragment.NoInternetFragment
@@ -16,10 +18,16 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private lateinit var connectivityObserver: NetworkConnectivityObserver
+    private lateinit var viewModel: MovieViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        viewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
+        viewModel.streamFragments.observe(this, Observer { fragment ->
+            loadFragment(fragment)
+        })
 
         connectivityObserver = NetworkConnectivityObserver(applicationContext)
 

@@ -50,7 +50,9 @@ class SearchFragment : Fragment() {
                 movieViewModel.searchMovies(query.toString().replace(" ", "%20"))
                 movieViewModel.movies2.observe(viewLifecycleOwner, Observer { dataList ->
                     binding.tab2RecyclerView.adapter =
-                        MovieAdapter(movies = dataList)
+                        MovieAdapter(movies = dataList, listener = { value ->
+                            movieViewModel.itemSelected(value)
+                        })
                 })
                 hideKeyboard()
                 return true

@@ -41,8 +41,12 @@ class PopularFragment : Fragment() {
 
         movieViewModel.movies1.observe(viewLifecycleOwner, Observer { dataList ->
             binding.tab1RecyclerView.adapter =
-                MovieAdapter(movies = dataList)
+                MovieAdapter(movies = dataList, listener = { value ->
+                    movieViewModel.itemSelected(value)
+                })
         })
 
     }
+
+
 }

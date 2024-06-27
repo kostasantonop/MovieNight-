@@ -7,7 +7,7 @@ import com.example.movienight.databinding.HolderRecyclerViewBinding
 import com.example.movienight.movie.Movie
 
 
-class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<MovieViewHolder>() {
+class MovieAdapter(private val movies: List<Movie>, private val listener: (String) -> Unit) : RecyclerView.Adapter<MovieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding = HolderRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -19,7 +19,9 @@ class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<Movie
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val movieItem = movies[position]
-        holder.bind(movieItem)
+        holder.bind( movies[position])
+        holder.binding.infoBtn.setOnClickListener {
+            listener(movies[position].id.toString())
+        }
     }
 }
