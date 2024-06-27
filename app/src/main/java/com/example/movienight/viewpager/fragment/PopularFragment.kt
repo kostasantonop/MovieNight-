@@ -45,8 +45,5 @@ class PopularFragment : Fragment() {
                     movieViewModel.itemSelected(value)
                 })
         })
-
     }
-
-
 }

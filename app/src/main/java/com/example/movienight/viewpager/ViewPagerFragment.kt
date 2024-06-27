@@ -48,4 +48,8 @@ class ViewPagerFragment : Fragment() {
             }
         })
     }
+    companion object {
+        @JvmStatic
+        fun newInstance() = ViewPagerFragment()
+    }
 }

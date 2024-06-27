@@ -17,7 +17,6 @@ class InfoFragment : Fragment() {
     private lateinit var binding: FragmentInfoBinding
     private lateinit var movieViewModel: MovieViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val act = activity
@@ -50,15 +49,16 @@ class InfoFragment : Fragment() {
                 binding.overviewTextView.text = it.overview
                 binding.foreignTitleTextView.text = it.original_title
                 binding.ratingTextView.text = String.format("%.1f", it.vote_average)
-                binding.popularityTextView.text = it.vote_average.toString()
+                binding.popularityTextView.text = "Popularity: ".plus(it.vote_count.toString())
                 binding.dateTextView.text = it.release_date?.take(4)
                 Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(it.poster_path)).into(binding.imageView)
             }
         })
 
         binding.backBtn.setOnClickListener {
-
+            movieViewModel.mainScreen()
         }
+
     }
 
     companion object {
