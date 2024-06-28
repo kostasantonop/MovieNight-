@@ -52,4 +52,6 @@ class ViewPagerFragment : Fragment() {
         @JvmStatic
         fun newInstance() = ViewPagerFragment()
     }
+
+
 }

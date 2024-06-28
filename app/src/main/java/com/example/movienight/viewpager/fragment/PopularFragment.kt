@@ -11,7 +11,7 @@ import com.example.movienight.MovieViewModel
 import com.example.movienight.databinding.FragmentPopularBinding
 import com.example.movienight.viewpager.recycler.MovieAdapter
 
-class PopularFragment : Fragment() {
+class PopularFragment : BaseFragment() {
 
     private lateinit var binding: FragmentPopularBinding
     private lateinit var movieViewModel: MovieViewModel
@@ -36,6 +36,12 @@ class PopularFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupDatabase()
+        movieViewModel.setupDatabase()
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         movieViewModel.popularMovies()
 
@@ -43,7 +49,7 @@ class PopularFragment : Fragment() {
             binding.tab1RecyclerView.adapter =
                 MovieAdapter(movies = dataList, listener = { value ->
                     movieViewModel.itemSelected(value)
-                })
+                },movieDao)
         })
     }
 }

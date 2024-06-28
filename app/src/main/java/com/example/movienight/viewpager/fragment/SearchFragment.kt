@@ -10,11 +10,12 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.movienight.DataBaseMovies.Movie
 import com.example.movienight.MovieViewModel
 import com.example.movienight.databinding.FragmentSearchBinding
 import com.example.movienight.viewpager.recycler.MovieAdapter
 
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSearchBinding
     private lateinit var movieViewModel: MovieViewModel
@@ -39,6 +40,12 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupDatabase()
+        movieViewModel.setupDatabase()
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         binding.searchView.setOnClickListener {
             binding.searchView.onActionViewExpanded()
@@ -52,9 +59,10 @@ class SearchFragment : Fragment() {
                     binding.tab2RecyclerView.adapter =
                         MovieAdapter(movies = dataList, listener = { value ->
                             movieViewModel.itemSelected(value)
-                        })
+                        },movieDao)
                 })
                 hideKeyboard()
+
                 return true
             }
 
@@ -62,6 +70,20 @@ class SearchFragment : Fragment() {
                 return true
             }
         })
+
+        binding.tab2RecyclerView.adapter =
+            MovieAdapter(movies = mutableListOf(), listener = { value ->
+                movieViewModel.itemSelected(value)
+            }, movieDao)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        binding.tab2RecyclerView.adapter =
+            MovieAdapter(movies = mutableListOf(), listener = { value ->
+                movieViewModel.itemSelected(value)
+            },movieDao)
     }
 
     private fun hideKeyboard() {
