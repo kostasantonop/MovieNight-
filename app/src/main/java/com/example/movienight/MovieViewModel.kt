@@ -1,22 +1,17 @@
 package com.example.movienight
 
 import android.app.Application
-import android.content.ContentProvider
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
-import com.example.movienight.movie.InfoMovie
-import com.example.movienight.DataBaseMovies.Movie
 import com.example.movienight.DataBaseMovies.MovieDao
 import com.example.movienight.DataBaseMovies.MovieDatabase
-import com.example.movienight.movie.MovieList
-import com.example.movienight.viewpager.fragment.BaseFragment
+import com.example.movienight.DataBaseMovies.movie.InfoMovie
+import com.example.movienight.DataBaseMovies.movie.Movie
+import com.example.movienight.DataBaseMovies.movie.MovieList
 import com.example.movienight.viewpager.fragment.InfoFragment
 import com.google.gson.Gson
 import io.ktor.client.HttpClient
@@ -24,7 +19,6 @@ import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class MovieViewModel(application: Application): AndroidViewModel(application) {
 
@@ -76,10 +70,8 @@ class MovieViewModel(application: Application): AndroidViewModel(application) {
     fun searchMovies(searchedMovie: String) {
         viewModelScope.launch {
             val searchList: MutableList<Movie> = mutableListOf()
-
-            for (page in 1..10) {
                 val response =
-                    client.get("https://api.themoviedb.org/3/search/movie?query=$searchedMovie&include_adult=false&language=en-US&page=$page&api_key=$apiKey")
+                    client.get("https://api.themoviedb.org/3/search/movie?query=$searchedMovie&include_adult=false&language=en-US&page=1&api_key=$apiKey")
                 val jsonResponse = Gson().fromJson(response.bodyAsText(), MovieList::class.java)
                 searchList.addAll(jsonResponse.results.mapNotNull {
                     Movie(
@@ -90,20 +82,14 @@ class MovieViewModel(application: Application): AndroidViewModel(application) {
                         it.release_date
                     )
                 })
-            }
             _movies2.postValue(searchList)
         }
     }
 
     fun favouriteMovies() {
         viewModelScope.launch {
-
                 val favouriteList: MutableList<Movie> = movieDao.getAllFavourites()
-
-
                 _movies4.postValue(favouriteList)
-
-
         }
     }
 
@@ -116,7 +102,6 @@ class MovieViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun setupDatabase(){
-
         val database =  Room.databaseBuilder(
             getApplication(),
             MovieDatabase::class.java,

@@ -3,14 +3,13 @@ package com.example.movienight.viewpager.recycler
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movienight.databinding.HolderRecyclerViewBinding
-import com.example.movienight.DataBaseMovies.Movie
+import com.example.movienight.DataBaseMovies.movie.Movie
 import com.example.movienight.DataBaseMovies.MovieDao
-import com.example.movienight.viewpager.fragment.FavoritesFragment
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.runBlocking
 
 class MovieViewHolder( val binding : HolderRecyclerViewBinding) : RecyclerView.ViewHolder(binding.root){
-    fun bind(movie : Movie,movieDao: MovieDao){
+    fun bind(movie : Movie, movieDao: MovieDao){
         binding.apply {
             if (movie.poster_path != null) {
                 Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(movie.poster_path)).resize(0,620)

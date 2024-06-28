@@ -1,4 +1,4 @@
-package com.example.movienight.movie
+package com.example.movienight.DataBaseMovies.movie
 
 data class InfoMovie(
     val poster_path : String?,

@@ -1,4 +1,4 @@
-package com.example.movienight.DataBaseMovies
+package com.example.movienight.DataBaseMovies.movie
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

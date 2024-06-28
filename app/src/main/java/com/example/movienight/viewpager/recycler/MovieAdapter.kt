@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movienight.databinding.HolderRecyclerViewBinding
-import com.example.movienight.DataBaseMovies.Movie
+import com.example.movienight.DataBaseMovies.movie.Movie
 import com.example.movienight.DataBaseMovies.MovieDao
 
 

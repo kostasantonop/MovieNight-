@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.movienight.DataBaseMovies.Movie
 import com.example.movienight.MovieViewModel
 import com.example.movienight.databinding.FragmetFavoritesBinding
 import com.example.movienight.viewpager.recycler.MovieAdapter
-import kotlinx.coroutines.runBlocking
 
 class FavoritesFragment : BaseFragment() {
 

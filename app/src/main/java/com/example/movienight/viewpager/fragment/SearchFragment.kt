@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.movienight.DataBaseMovies.Movie
 import com.example.movienight.MovieViewModel
 import com.example.movienight.databinding.FragmentSearchBinding
 import com.example.movienight.viewpager.recycler.MovieAdapter
