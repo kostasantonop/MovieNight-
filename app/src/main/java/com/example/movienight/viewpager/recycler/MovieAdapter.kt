@@ -3,9 +3,9 @@ package com.example.movienight.viewpager.recycler
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movienight.databinding.HolderRecyclerViewBinding
-import com.example.movienight.DataBaseMovies.movie.Movie
 import com.example.movienight.DataBaseMovies.MovieDao
+import com.example.movienight.DataBaseMovies.movie.Movie
+import com.example.movienight.databinding.HolderRecyclerViewBinding
 
 
 class MovieAdapter(private var movies: List<Movie>,
@@ -28,6 +28,8 @@ class MovieAdapter(private var movies: List<Movie>,
         holder.binding.infoBtn.setOnClickListener {
             listener(movies[position].id.toString())
         }
+        holder.binding.imageInfoBtn.setOnClickListener{
+            listener(movies[position].id.toString())
+        }
     }
-
 }
