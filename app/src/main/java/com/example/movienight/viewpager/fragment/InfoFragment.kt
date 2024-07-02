@@ -51,7 +51,10 @@ class InfoFragment : Fragment() {
                 binding.ratingTextView.text = String.format("%.1f", it.vote_average)
                 binding.popularityTextView.text = "Popularity: ".plus(it.vote_count.toString())
                 binding.dateTextView.text = it.release_date?.take(4)
-                Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(it.poster_path)).into(binding.imageView)
+                Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(it.poster_path))
+                    .fit()
+                    .centerCrop()
+                    .into(binding.placeholderImageView)
             }
         })
 
