@@ -14,7 +14,7 @@ class MovieViewHolder(val binding: HolderRecyclerViewBinding) :
         binding.apply {
             if (movie.poster_path != null) {
                 Picasso.get().load("https://image.tmdb.org/t/p/w500".plus(movie.poster_path))
-                    .resize(0, 620)
+                    .resize(0, 680)
                     .into(binding.imageInfoBtn)
             }
             binding.titleTextView.text = movie.title

@@ -10,8 +10,8 @@ import com.example.movienight.databinding.HolderRecyclerViewBinding
 
 class MovieAdapter(private var movies: List<Movie>,
                    private val listener: (String) -> Unit,
-                   private var movieDao: MovieDao,
-                   ) : RecyclerView.Adapter<MovieViewHolder>() {
+                   private var movieDao: MovieDao
+) : RecyclerView.Adapter<MovieViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
